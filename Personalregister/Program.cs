@@ -5,7 +5,7 @@
         /*
          Uppgift 1: Det bör finnas klasser för att lagra personer och personalregister.
 
-         Uppgift 2: Man bör kunna nå och ändra på namn och lön på personer och kunna lägga till och ta bort personer från presonalregistret.
+         Uppgift 2: Man bör kunna nå och ändra på namn och lön på personer och kunna lägga till och ta bort personer från personalregistret.
          */
 
 
