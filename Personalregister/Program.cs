@@ -1,28 +1,108 @@
 ﻿namespace Personalregister {
     internal class Program {
+
+
+        /*
+         Uppgift 1: Det bör finnas klasser för att lagra personer och personalregister.
+
+         Uppgift 2: Man bör kunna nå och ändra på namn och lön på personer och kunna lägga till och ta bort personer från presonalregistret.
+         */
+
+
+
         static void Main(string[] args) {
+            StaffRegister sRegister = new StaffRegister();
+            bool displayMenu = true;
+
+            while (displayMenu) {
+                displayMenu = MainMenu(sRegister);
+            }
+
+        }
+
+        private static bool MainMenu(StaffRegister staffRegister) {
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1) Print Staff Register");
+            Console.WriteLine("2) Add Staff Member");
+            Console.WriteLine("3) Remove Staff Member");
+            Console.WriteLine("4) Run Tests");
+            Console.WriteLine("5) Exit");
+
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : 999;
+
+            switch (parsedResult) {
+
+                case 1:
+                    staffRegister.printStaffRegister();
+                    return true;
+
+                case 2:
+
+                    addToList(staffRegister);
+                    return true;
+
+                case 3:
+                    Console.WriteLine("Functionality to be added :(");
+                    return true;
+
+                case 4:
+                    testCases();
+                    return true;
+
+                case 5:  
+                    return false;
+
+                default:
+                    Console.WriteLine("Only options 1-5 are valid");
+                    return true;
+            }
+            
+        }
+
+        private static void addToList(StaffRegister staffRegister) {
+            Console.WriteLine("Input first name of staff member:");
+            string firstName = Console.ReadLine();
+
+            Console.WriteLine("Input last name of staff member:");
+            string lastName = Console.ReadLine();
+
+            Console.WriteLine("Input salary of staff member in SEK:");
+
+            int salary = int.TryParse(Console.ReadLine(), out salary) ? salary : 0;
+
+            if (salary == 0) {
+                Console.WriteLine("Invalid salary, returning to main menu.");
+                return;
+            }
+
+            Employee e = new Employee(firstName, lastName, salary);
+            staffRegister.addStaffMember(e);
+            Console.WriteLine("Staff member {0} with salary {1:C} added to register", e.FullName, e.Salary);
+        }
+
+        private static void testCases() {
             Employee e1 = new Employee("Bob", "Jones", 25000);
             Employee e2 = new Employee("Jerry", "James", 24500);
-            StaffRegister sRegister = new StaffRegister();
+            StaffRegister testStaffRegister = new StaffRegister();
 
-            Console.WriteLine(e1.FullName + "-" + e1.Salary);
-            Console.WriteLine(e2.FullName + "-" + e2.Salary);
+            Console.WriteLine("Created staff member " + e1.FullName + "-" + e1.Salary);
+            Console.WriteLine("Created staff member " + e2.FullName + "-" + e2.Salary);
 
-            sRegister.addStaffMember(e1);
-            sRegister.addStaffMember(e2);
+            testStaffRegister.addStaffMember(e1);
+            testStaffRegister.addStaffMember(e2);
 
-            sRegister.printStaffRegister();
+            testStaffRegister.printStaffRegister();
 
-            if (sRegister.removeStaffMember(e2)) {
+            if (testStaffRegister.removeStaffMember(e2)) {
                 Console.WriteLine("Removed staff member {0}", e2.FullName);
             }
             else {
                 Console.WriteLine("Staff member {0} was not removed", e2.FullName);
             }
 
-            sRegister.printStaffRegister();
+            testStaffRegister.printStaffRegister();
 
-            if (sRegister.removeStaffMember(e2)) {
+            if (testStaffRegister.removeStaffMember(e2)) {
                 Console.WriteLine("Removed staff member {0}", e2.FullName);
             }
             else {
